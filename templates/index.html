@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <title>CUET Bus Tracker</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+         <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+ integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+ crossorigin=""></script>
+
+
+    <style>
+            #mapid {margin: 0 auto; height: 400px; width:800px;}
+
+    </style>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/">CUET Bus Tracking Dashboard</a>
+                  </li>
+                </ul>
+              </nav>
+    <!--The div element for the map -->
+    <h3 align="center">GPS Data</h3> 
+    <h5 align="center">(Page refreshes automatically every 10 seconds)</h5><hr>
+    <div id="mapid"></div>
+    
+    <script>
+        var mymap = L.map('mapid').setView([22.45984, 91.97104], 13);
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1Ijoic2hhaGVkbWVoYnViIiwiYSI6ImNqdHdxdjhlNjBxY3o0M3BnMWRpMXd4azYifQ.QQnUDA2XwX30o9XTwuEdIQ'
+    }).addTo(mymap);
+
+    var greenIcon = L.icon({
+    iconUrl: '{{ url_for('static', filename='bus-icon.png') }}',
+
+    iconSize:     [60, 25], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [3, -90] // point from which the popup should open relative to the iconAnchor
+});
+L.marker([22.45984, 91.97104], {icon: greenIcon}).addTo(mymap).bindPopup("<b>Padma</b>").openPopup();
+
+    //var marker = L.marker([51.5, -0.09]).addTo(mymap);
+    //marker.bindPopup("<b>Padma</b><br>Back to CUET").openPopup();
+    </script>
+   
+  </body>
+</html>
+
+
