@@ -15,11 +15,11 @@ app = Flask(__name__)
 def runpy():
     print("reloading....")
     try:
-        conn = psycopg2.connect(host="localhost",database="cuetbus", user="postgres", password="")
-        """
+        # conn = psycopg2.connect(host="localhost",database="cuetbus", user="postgres", password="")
+        # """
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-        """
+        # """
         cur = conn.cursor()
         query = "SELECT * FROM padmalatlong"
         cur.execute(query)
@@ -39,11 +39,11 @@ def uploaddata():
     lattitude = request.args.get('lat')
     longitude = request.args.get('long')
     try:
-        conn = psycopg2.connect(host="localhost",database="cuetbus", user="postgres", password="")
-        """
+        # conn = psycopg2.connect(host="localhost",database="cuetbus", user="postgres", password="")
+        # """
         DATABASE_URL = os.environ['DATABASE_URL']
         conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-        """
+        # """
         cur = conn.cursor()
         query = "UPDATE padmalatlong SET lat=%s, long=%s"
         values = (lattitude, longitude)
